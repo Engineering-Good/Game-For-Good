@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinatown Active Catcher - Stretch & Catch Game</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- MediaPipe CDN Imports -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/pose.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header>
+    <div class="logo-container">
+      <span class="logo-icon">🏮</span>
+      <div class="logo-text">
+        <h1>牛车水活力捕手</h1>
+        <p>Chinatown Active Catcher • Stay Fit, Catch Joy</p>
+      </div>
+    </div>
+    <div class="header-tagline">
+      <span class="score-badge positive">Active Ageing Exercise • 活跃乐龄</span>
+    </div>
+  </header>
+
+  <!-- Main Dashboard -->
+  <main class="dashboard">
+    
+    <!-- Left Sidebar: Controls & Info -->
+    <aside class="sidebar">
+      
+      <!-- Legends / Item description -->
+      <section class="glass-panel">
+        <h2>🏮 Catch Items Legend • 游戏道具</h2>
+        <div class="legend-grid">
+          <div class="legend-item">
+            <span class="legend-icon">🧧</span>
+            <div class="legend-details">
+              <div class="legend-name">Red Packet (红包)</div>
+              <div class="legend-desc">Prosperity & Happiness</div>
+            </div>
+            <span class="score-badge positive">+10</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon">🏮</span>
+            <div class="legend-details">
+              <div class="legend-name">Red Lantern (灯笼)</div>
+              <div class="legend-desc">Good Luck & Joy</div>
+            </div>
+            <span class="score-badge positive">+10</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon">🍑</span>
+            <div class="legend-details">
+              <div class="legend-name">Longevity Peach (寿桃)</div>
+              <div class="legend-desc">Good Health & Longevity</div>
+            </div>
+            <span class="score-badge positive">+10</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon">🍊</span>
+            <div class="legend-details">
+              <div class="legend-name">Rotten Fruit (烂橘)</div>
+              <div class="legend-desc">Avoid catching this!</div>
+            </div>
+            <span class="score-badge negative">-10</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon">🧨</span>
+            <div class="legend-details">
+              <div class="legend-name">Firecracker Bomb (爆竹)</div>
+              <div class="legend-desc">Avoid! Hazards deduction</div>
+            </div>
+            <span class="score-badge negative">-10</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Panel -->
+      <section class="glass-panel">
+        <h2>⚙️ Game Settings • 游戏设置</h2>
+        
+        <div class="control-group">
+          <label>Game Difficulty • 难度选择</label>
+          <div class="difficulty-selector">
+            <button class="btn-diff active" id="btnDiffEasy" onclick="setDifficulty('easy')">Easy (容易)</button>
+            <button class="btn-diff" id="btnDiffMedium" onclick="setDifficulty('medium')">Medium (普通)</button>
+            <button class="btn-diff" id="btnDiffHard" onclick="setDifficulty('hard')">Hard (困难)</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Mirror Camera • 镜像翻转</label>
+          <div class="difficulty-selector">
+            <button class="btn-diff active" id="btnMirrorOn" onclick="toggleMirror(true)">On (开启)</button>
+            <button class="btn-diff " id="btnMirrorOff" onclick="toggleMirror(false)">Off (关闭)</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Active Limbs • 运动肢体</label>
+          <div class="difficulty-selector">
+            <button class="btn-diff active" id="btnLimbHands" onclick="setLimbMode('hands')">Hands (手臂)</button>
+            <button class="btn-diff" id="btnLimbLegs" onclick="setLimbMode('legs')">Legs (双腿)</button>
+            <button class="btn-diff" id="btnLimbBoth" onclick="setLimbMode('both')">Both (全部)</button>
+            
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Volume • 音量</label>
+          <div class="audio-slider-container">
+            <span class="volume-icon" id="volIcon">🔊</span>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="adjustVolume(this.value)">
+          </div>
+        </div>
+      </section>
+
+      <!-- Personal High Scores & Performance -->
+      <section class="glass-panel">
+        <h2>🏆 High Score • 荣誉榜</h2>
+        <div class="stats-list">
+          <div class="stat-row">
+            <span class="stat-label">Personal High Score (最高分数)</span>
+            <span class="stat-value" id="highScoreText" style="color: var(--gold); font-family: var(--font-display); font-weight: bold;">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Games Played (累计次数)</span>
+            <span class="stat-value" id="gamesPlayedText">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Body Tracker Status</span>
+            <span class="stat-value" id="trackerStatus" style="color: var(--ruby);">Offline</span>
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- Right Area: Interactive Webcam Game Canvas -->
+    <section class="game-container calibrating" id="gameArea">
+      
+      <!-- Webcam Feed (Hidden but processed in background) -->
+      <video class="input_video webcam-feed-hidden" autoplay playsinline muted></video>
+      
+      <!-- Display Canvas (WebGL or 2D) -->
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+      <!-- HUD Elements (Shown during game play) -->
+      <div class="game-hud hidden" id="gameHud">
+        <div class="hud-panel">
+          <span class="hud-label">Score (分数)</span>
+          <span class="hud-value" id="hudScore">0</span>
+        </div>
+        <div class="hud-panel">
+          <span class="hud-label">Time (时间)</span>
+          <span class="hud-value" id="hudTime">60s</span>
+        </div>
+      </div>
+
+      <!-- Overlay Screen: Loading & Calibration -->
+      <div class="overlay-screen" id="calibOverlay">
+        <div class="overlay-content">
+          <h2 class="overlay-title">🏮 Camera Calibration</h2>
+          <p class="overlay-subtitle">Let's get ready! 请站在相机前方</p>
+          <p class="overlay-text" id="calibInstructions">
+            1. Allow webcam access when prompted. (请允许相机使用权限)<br>
+            2.Position yourself so the camera sees your arms and hands. (请确保双手在相机范围内)<br>
+            3. Stretch your arms and wave to test the tracking indicators. (伸展双臂进行测试)
+          </p>
+
+          <div class="calibration-status">
+            <div class="status-card" id="statusHands">
+              <div class="status-icon">🙌</div>
+              <div class="status-label">Hands Detected</div>
+              <div class="status-val" id="statusHandsVal">Checking...</div>
+            </div>
+            <div class="status-card" id="statusLegs">
+              <div class="status-icon">🦵</div>
+              <div class="status-label">Legs Detected</div>
+              <div class="status-val" id="statusLegsVal">Checking...</div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="btnStartGame" disabled onclick="startGame()">
+            Calibrating Camera... <span class="calibration-loading"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Overlay Screen: Game Over Summary -->
+      <div class="overlay-screen hidden" id="gameOverOverlay">
+        <div class="overlay-content end-summary">
+          <h2 class="overlay-title" style="color: var(--gold);">游戏结束 • Game Over</h2>
+          <div class="star-rating" id="starRating">⭐⭐⭐</div>
+          
+          <div class="summary-score-box">
+            <div class="score-label">Final Score (最终得分)</div>
+            <div class="score-val" id="finalScoreVal">0</div>
+          </div>
+          
+          <p class="cheer-msg" id="cheerMsg">Fantastic job! Keep active and stay healthy!</p>
+          
+          <button class="btn-primary" onclick="restartCalibration()">Play Again (再玩一次)</button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Game Scripts -->
+  <script src="game.js"></script>
+</body>
+</html>
