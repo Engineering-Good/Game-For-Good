@@ -1,41 +1,23 @@
-# T4G-Template
-<!--- delete this part after done. Start --->
-This is a GitHub repository intended to act as a template for an open source assistive technology device. It is meant to contain all design files, build files, and documentation for the project. More information about how to use the template is available in the [OpenAT_Template_Guide](https://github.com/makersmakingchange/OpenAT-Template/blob/main/OpenAT_Template_Guide.pdf). * working in progress for EG T4G Template Guide.
-<!--- TITLE --->
-<!--- Open Source Assistive Technology: GitHub Readme Template --->
-
-
-<!--- INSTRUCTIONS --->
-<!--- This is a markdown template for creating the README.md file in a GitHub repository. This file is rendered and displayed automatically when someone visits the repository.
-
-This document includes helper text that will not be displayed when rendered. Any text between the less-than sign + exclamation mark + three hyphen-minus (<!---) and matching three hyphen-minus + greater-than sign will not be displayed. This helper text can be deleted once the corresponding section is completed.
-
-This template has a number of fields that can be searched and replaced with other text:
- - <Device_Name> Replace this with filename-friendly version of the device with underscores. e.g., T4G-Adapted-Recorder-Button
- - <DeviceName> Replace this with the human-readable name of the device with spaces. e.g., Adapted RecorderButton
- - <DesignerName> Replace this with the person or organization responsible for the design. e.g., John Doe.
- - <Repository_Link> Replace this with the web address for the repository. e.g., (e.g., https://github.com/Engineering-Good/T4G-Adapted-Recorder-Button))
- - <MaterialCost> Replace this with the dollar cost and currency (SGD, USD, etc.) of the materials of the device.
- - <ShippingCost> Replace this with the dollar cost and currency (SGD, USD, etc.) of shipping the device (if possible).
- - <YEAR> year(s) of the copyright 
- 
-Any text that is currently holding a space / is an instruction for the person filling in the README is in all capitals, to make it easier to see them in a rendered version.
---->
-<!--- delete this part after done. End --->
-
-# Overview
+# Game For Good
 <!--- TITLE --->
 <!--- SUMMARY --->
-The is an assistive technology device that.
+## Active Aging Motion Game for Chinatown AAC
 
-The device is comprised of off-the-shelf electronics and 3D printed parts.
+A web-based interactive game designed for the seniors at Chinatown Active Ageing Centre (AAC) to promote physical health, mobility, and social connection.
 
-The is open assistive technology (OpenAT). Under the terms of the open source licenses, the device may be built, used, and improved upon by anyone.
+## 🌟 Overview
+This project targets the well-being of elderly participants by blending low-to-mid intensity physical exercises with gaming. Developed with accessibility in mind, the game is designed to be completely self-managed by the seniors, encouraging independent play and peer-to-peer socialization within the centre.
 
-The overall cost of materials is about $ (excluding component shipping fee).
+## 🎯 Key Features
+* **Tailored Physical Activity:** Incorporates low-to-mid intensity movements specifically designed to help the elderly stay active, healthy, and mobile.
+* **Independent Setup:** The web interface is highly intuitive, allowing any group of seniors to easily launch, set up, and play the game by themselves without requiring constant staff supervision.
+* **Social Connection:** Acts as a catalyst for communication, helping to improve socialization, teamwork, and bonding among the elderly community.
 
-The current version of the device (v1.0) has been built and user tested.
-<img src="photos/device-name.jpg" width="500" style="border-radius: 15px" alt="Picture of Template A Nice Main Device Name.">
+## 👥 Target Audience & Deployment
+* **Location:** Chinatown Active Ageing Centre (AAC), Singapore.
+* **Users:** Seniors looking for an engaging, accessible, and community-driven way to stay active.
+
+<img src="photos/AAC-game-UI.png" width="500" style="border-radius: 15px" alt="Picture of Template A Nice Main Device Name.">
 
 ## How to Obtain the Device
 
@@ -49,7 +31,7 @@ This is an open-source assistive technology, so anyone is free to build it. All 
 
 - Want to help? We are always looking for volunteers to help build these devices for the community. If you have the skills and want to contribute, please contact us via email at [contactus@engineeringgood.org](mailto:contactus@engineeringgood.org).
 
-## Build Instructions
+## Build Instructions (working in progress)
 
 ### 1. Read through the Maker Guide
 
@@ -67,7 +49,8 @@ Reference the Assembly Guide section of the [Maker Guide](/documentation/Product
 
 As open source assistive technology, you are welcomed and encouraged to improve upon the design.
 
-## Files
+## Files (working in progress)
+
 
 ### Documentation
 
@@ -78,17 +61,6 @@ As open source assistive technology, you are welcomed and encouraged to improve 
 | User Guide           | 1.0     | [Template_User_Guide](/documentation/Product_Manual_Template_Product_Name.pdf)    |
 | Changelog            | 1.0     | [Template_Change_Log](/documentation/CHANGES.txt)     |
 
-## Open Hardware Attribution
-
-The template was designed by.
-
-The documentation template was created by Makers Making Change / Neil Squire Society and is used under a CC BY-SA 4.0 license. It is available at the following link: [MMC OpenAt Template](https://github.com/makersmakingchange/OpenAT-Template)
-
-The core design for this device/template is based on the some device/template, an open-source assistive technology project.
-- Original Designer: Makers Making Change (a program of Neil Squire).
-- Original Copyright:  Copyright (c) Neil Squire / Makers Making Change.
-- Original Source Location: The original project source files are available online at: 
-<https://github.com/makersmakingchange/OpenAT-Template>
 
 ## License
 
@@ -104,7 +76,7 @@ You may redistribute and modify this documentation and make products using it un
 This documentation is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.
 Please see the CERN-OHL-W v2 for applicable conditions.
 
-Source Location: <https://github.com/Engineering-Good/T4G-Template>
+Source Location: <https://github.com/Engineering-Good/Game-For-Good>
 
 
 ----
