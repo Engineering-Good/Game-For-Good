@@ -51,8 +51,8 @@ const ITEM_TYPES = {
 
 // Physics speeds based on difficulty
 const DIFFICULTY_SETTINGS = {
-  easy: { minSpeed: 2, maxSpeed: 4, spawnDelay: 1500, ringSize: 100, emojiSize: 62 },
-  medium: { minSpeed: 4, maxSpeed: 6.5, spawnDelay: 1100, ringSize: 70, emojiSize: 42 },
+  easy: { minSpeed: 2, maxSpeed: 4, spawnDelay: 1500, ringSize: 70, emojiSize: 42 },
+  medium: { minSpeed: 4, maxSpeed: 6.5, spawnDelay: 1100, ringSize: 65, emojiSize: 37 },
   hard: { minSpeed: 6, maxSpeed: 10, spawnDelay: 750, ringSize: 56, emojiSize: 32 }
 };
 
@@ -256,8 +256,8 @@ function getLimbData(landmarks, index, type) {
     x = (1 - landmark.x) * canvasElement.width;
     
     // Labels match standard anatomical mapping
-    if (index === 15) label = 'L Hand'; // Left wrist in pre-mirrored image is user's physical Right hand
-    else if (index === 16) label = 'R Hand'; // Right wrist in pre-mirrored image is user's physical Left hand
+    if (index === 19) label = 'L Hand'; // Left wrist in pre-mirrored image is user's physical Right hand
+    else if (index === 20) label = 'R Hand'; // Right wrist in pre-mirrored image is user's physical Left hand
     else if (index === 25) label = 'L Knee';
     else if (index === 26) label = 'R Knee';
     else if (index === 27) label = 'L Ankle';
@@ -268,8 +268,8 @@ function getLimbData(landmarks, index, type) {
     x = landmark.x * canvasElement.width;
     
     // Labels must be SWAPPED because MediaPipe detects anatomical sides on a flipped image!
-    if (index === 15) label = 'R Hand';     
-    else if (index === 16) label = 'L Hand';      
+    if (index === 19) label = 'R Hand';     
+    else if (index === 20) label = 'L Hand';      
     else if (index === 25) label = 'R Knee';
     else if (index === 26) label = 'L Knee';
     else if (index === 27) label = 'R Ankle';
@@ -300,8 +300,8 @@ function onPoseResults(results) {
   if (results.poseLandmarks) {
     // Process wrists (hands) if hands or both are enabled
     if (limbMode === 'hands' || limbMode === 'both') {
-      const leftWristData = getLimbData(results.poseLandmarks, 15, 'hand');
-      const rightWristData = getLimbData(results.poseLandmarks, 16, 'hand');
+      const leftWristData = getLimbData(results.poseLandmarks, 19, 'hand');
+      const rightWristData = getLimbData(results.poseLandmarks, 20, 'hand');
       
       if (leftWristData) {
         activeLimbPoints.push(leftWristData);
@@ -740,7 +740,7 @@ function drawGame(results) {
       //console.log(settings.emojiSize)
       canvasCtx.shadowBlur = 0;
       canvasCtx.fillStyle = '#fff';
-      canvasCtx.font = setEmojiSize + 'px sans-serif'; // easy 62, med 42 hard 32 
+      canvasCtx.font = setEmojiSize + 'px sans-serif'; // easy 32, med 37 hard 42 
       canvasCtx.textAlign = 'center';
       canvasCtx.textBaseline = 'middle';
       canvasCtx.fillText(item.emoji, item.x, item.y);
@@ -778,9 +778,9 @@ function drawGame(results) {
     // Arms (if hands active)
     if (limbMode === 'hands' || limbMode === 'both') {
       drawLine(11, 13); // L Shoulder to Elbow
-      drawLine(13, 15); // L Elbow to Wrist
+      drawLine(13, 19); // L Elbow to Wrist
       drawLine(12, 14); // R Shoulder to Elbow
-      drawLine(14, 16); // R Elbow to Wrist
+      drawLine(14, 20); // R Elbow to Wrist
     }
 
     // Legs (if legs active)
